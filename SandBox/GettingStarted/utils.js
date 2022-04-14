@@ -102,10 +102,29 @@ const encrypt = (letter, shift) => {
     } else return cipherKey[newNum];
 };
 
+const analyzeArray = (args) => {
+    let analysis = {};
+    //Calculate average
+    let total = 0;
+    let min = null;
+    let max = null;
+    for (let i = 0; i < args.length; i++) {
+        total += args[i];
+        if (!min || (min && args[i] < min)) min = args[i];
+        if (!max || (max && args[i] > max)) max = args[i];
+    }
+    analysis["average"] = total / args.length;
+    analysis["length"] = args.length;
+    analysis["max"] = max;
+    analysis["min"] = min;
+    return analysis;
+};
+
 module.exports = {
     sum,
     capitalize,
     reverseString,
     calculator,
     caesarCipher,
+    analyzeArray,
 };

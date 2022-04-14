@@ -4,6 +4,7 @@ import {
     reverseString,
     calculator,
     caesarCipher,
+    analyzeArray,
 } from "../GettingStarted/utils";
 test("adds 1 + 2 to equal 3", () => {
     expect(sum(1, 2)).toBe(3);
@@ -122,5 +123,31 @@ describe("Caesar Cipher encrypts messages properly", () => {
 
     test("Shifts properly with a shift other than 1 specified", () => {
         expect(caesarCipher("Testing more! :)", 3)).toBe("Whvwlqj pruh! :)");
+    });
+});
+
+/** Analyze Array
+ *  - returns the proper average
+ *  - returns the smalles number
+ *  - returns the largest number
+ *  - returns the length of the array
+ */
+describe("Analyze array returns the expected values", () => {
+    test("Calculates average, min, max and length properly", () => {
+        expect(analyzeArray([1, 2, 3])).toEqual({
+            average: 2,
+            min: 1,
+            max: 3,
+            length: 3,
+        });
+    });
+
+    test("Works with an array with one number", () => {
+        expect(analyzeArray([5])).toEqual({
+            average: 5,
+            min: 5,
+            max: 5,
+            length: 1,
+        });
     });
 });
