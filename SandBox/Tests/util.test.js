@@ -3,6 +3,7 @@ import {
     capitalize,
     reverseString,
     calculator,
+    caesarCipher,
 } from "../GettingStarted/utils";
 test("adds 1 + 2 to equal 3", () => {
     expect(sum(1, 2)).toBe(3);
@@ -96,5 +97,24 @@ describe("All properties of the calculator object function properly", () => {
         expect(calculator({ op: "multiply", param1: 112, param2: 230 })).toBe(
             112 * 230
         );
+    });
+});
+
+/** Caesar Cipher
+ *  - Test basic 3 letter word with no edge cases
+ *  - Test that z loops back to a properly
+ *  - Test that we skip over spaces / punctuation
+ */
+describe("Caesar Cipher encrypts messages properly", () => {
+    test("Passes with no edge cases", () => {
+        expect(caesarCipher("Bad")).toBe("cbe");
+    });
+
+    test("Passes with z in the initial string", () => {
+        expect(caesarCipher("zack")).toBe("abdl");
+    });
+
+    test("Ignores punctiuation and spaces", () => {
+        expect(caesarCipher("Hello World!")).toBe("ifmmp xpsme!");
     });
 });

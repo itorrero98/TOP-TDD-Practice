@@ -46,9 +46,65 @@ const calculator = (args) => {
     }
 };
 
+const caesarCipher = (toEncrypt) => {
+    let encryptedString = "";
+    //Loop through our string and get encypted counterpart
+    for (let i = 0; i < toEncrypt.length; i++) {
+        encryptedString += encrypt(toEncrypt[i]);
+    }
+    console.log(`Turned ${toEncrypt} into ${encryptedString}`);
+    return encryptedString;
+};
+
+const encrypt = (letter) => {
+    let cipherKey = {
+        0: "a",
+        1: "b",
+        2: "c",
+        3: "d",
+        4: "e",
+        5: "f",
+        6: "g",
+        7: "h",
+        8: "i",
+        9: "j",
+        10: "k",
+        11: "l",
+        12: "m",
+        13: "n",
+        14: "o",
+        15: "p",
+        16: "q",
+        17: "r",
+        18: "s",
+        19: "t",
+        20: "u",
+        21: "v",
+        22: "w",
+        23: "x",
+        24: "y",
+        25: "z",
+    };
+
+    //Need to find the given letter in our cipherKey object
+    let num = Object.keys(cipherKey).find(
+        (key) => cipherKey[key] === letter.toLowerCase()
+    );
+    //If we don't find the letter in our key object then just give it back
+    if (typeof num === "undefined") return letter;
+    ++num;
+
+    //Now lets shift our number by 1, if it's over 26, wrap it back
+    let newNum = num <= 25 ? num : num - 26;
+
+    //Return the encrypted number
+    return cipherKey[newNum];
+};
+
 module.exports = {
     sum,
     capitalize,
     reverseString,
     calculator,
+    caesarCipher,
 };
