@@ -101,13 +101,15 @@ describe("All properties of the calculator object function properly", () => {
 });
 
 /** Caesar Cipher
+ *  - Tests should maintain capitals
  *  - Test basic 3 letter word with no edge cases
  *  - Test that z loops back to a properly
  *  - Test that we skip over spaces / punctuation
+ *  - Test with different shift values
  */
 describe("Caesar Cipher encrypts messages properly", () => {
     test("Passes with no edge cases", () => {
-        expect(caesarCipher("Bad")).toBe("cbe");
+        expect(caesarCipher("Bad")).toBe("Cbe");
     });
 
     test("Passes with z in the initial string", () => {
@@ -115,6 +117,10 @@ describe("Caesar Cipher encrypts messages properly", () => {
     });
 
     test("Ignores punctiuation and spaces", () => {
-        expect(caesarCipher("Hello World!")).toBe("ifmmp xpsme!");
+        expect(caesarCipher("Hello World!")).toBe("Ifmmp Xpsme!");
+    });
+
+    test("Shifts properly with a shift other than 1 specified", () => {
+        expect(caesarCipher("Testing more! :)", 3)).toBe("Whvwlqj pruh! :)");
     });
 });
