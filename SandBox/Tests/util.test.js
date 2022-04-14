@@ -1,4 +1,9 @@
-import { sum, capitalize, reverseString } from "../GettingStarted/utils";
+import {
+    sum,
+    capitalize,
+    reverseString,
+    calculator,
+} from "../GettingStarted/utils";
 test("adds 1 + 2 to equal 3", () => {
     expect(sum(1, 2)).toBe(3);
 });
@@ -38,5 +43,58 @@ describe("Reverse string functionality works", () => {
 
     test("Return a sentence properly reversed", () => {
         expect(reverseString("This will reverse!")).toBe("!esrever lliw sihT");
+    });
+});
+
+/** Calculator Tests
+ *  - Ensure that if no data is sent in, we throw an error
+ *  - **All functions should validate they input**
+ *  - When 2 numbers are passed into add the sum is returned
+ *  - When 2 numbers are passed into subtract the difference is returned
+ *  - When 2 numbers are passed into divide the quotient is returned
+ *  - When 2 numbers are passed into multiply the product is returned
+ */
+describe("All properties of the calculator object function properly", () => {
+    test("Handle empty params", () => {
+        expect(() => calculator()).toThrow(Error);
+        expect(() => calculator("")).toThrow(Error);
+        expect(() => calculator(undefined)).toThrow(Error);
+    });
+
+    test("Handle invalid input", () => {
+        expect(() =>
+            calculator({ op: "add", param1: "test", param2: 2 })
+        ).toThrow(Error);
+        expect(() =>
+            calculator({ op: "multiply", param1: 2, param2: "hello" })
+        ).toThrow(Error);
+        expect(() =>
+            calculator({ op: "randomName", param1: 2, param2: 5 })
+        ).toThrow(Error);
+    });
+
+    test("Add function returns proper sum", () => {
+        expect(calculator({ op: "add", param1: 2, param2: 5 })).toBe(7);
+        expect(calculator({ op: "add", param1: 112, param2: 230 })).toBe(342);
+    });
+
+    test("Subtract function returns proper difference", () => {
+        expect(calculator({ op: "subtract", param1: 2, param2: 5 })).toBe(-3);
+        expect(calculator({ op: "subtract", param1: 24, param2: 12 })).toBe(12);
+    });
+
+    test("Divide function returns proper quotient", () => {
+        expect(calculator({ op: "divide", param1: 9, param2: 3 })).toBeCloseTo(
+            3
+        );
+        expect(
+            calculator({ op: "divide", param1: 33, param2: 10 })
+        ).toBeCloseTo(33 / 10);
+    });
+    test("Multiply function returns proper quotient", () => {
+        expect(calculator({ op: "multiply", param1: 2, param2: 5 })).toBe(10);
+        expect(calculator({ op: "multiply", param1: 112, param2: 230 })).toBe(
+            112 * 230
+        );
     });
 });
